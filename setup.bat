@@ -5,7 +5,7 @@ cd src
 mkdir img
 mkdir js
 mkdir scss
-echo <html></html> > index.html
+echo "<html></html>" > index.html
 cd scss
 echo //Sander Geraedts - Code Panda > style.scss
 mkdir _partials
@@ -28,3 +28,4 @@ call npm install gulp-autoprefixer --save-dev
 call npm install browser-sync --save-dev
 call npm install gulp-pretty-url --save-dev
 call npm install gulp-htmlmin --save-dev
+call npm install gulp-jsmin --save-dev

@@ -9,6 +9,8 @@ var autoprefix		= require('gulp-autoprefixer');
 var browsersync		= require('browser-sync');
 var prettyurl		= require('gulp-pretty-url');
 var htmlmin			= require('gulp-htmlmin');
+var jsmin			= require('gulp-jsmin');
+var rename			= require('gulp-rename');
 
 gulp.task('watch', function() {
 	browsersync({
@@ -20,6 +22,7 @@ gulp.task('watch', function() {
 	gulp.watch('./src/scss/_partials/*.scss', ['sass-watch']);
 	gulp.watch('./src/img/*', ['img-watch']);
 	gulp.watch('./src/*.html', ['html-watch']);
+	gulp.watch('./src/js/*.js', ['js-watch']);
 });
 
 gulp.task('sass', function() {
@@ -54,6 +57,15 @@ gulp.task('html', function() {
 		.pipe(gulp.dest('./dist'));
 });
 
+gulp.task('js', function() {
+	gulp.src('./src/js/*.js')
+		.pipe(concat('main.js'))
+		.pipe(jsmin())
+		.pipe(rename({suffix: '.min'}))
+		.pipe(gulp.dest('./dist/js'));
+});
+
 gulp.task('sass-watch', ['sass'], browsersync.reload);
 gulp.task('img-watch', ['img'], browsersync.reload);
 gulp.task('html-watch', ['html'], browsersync.reload);
+gulp.task('js-watch', ['js'], browsersync.reload);
